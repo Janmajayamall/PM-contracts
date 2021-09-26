@@ -199,7 +199,14 @@ func _claim_rewards{
             tempvar storage_ptr = storage_ptr  
             tempvar pedersen_ptr = pedersen_ptr
         end
-    else: 
+    else:
+        # rebinding ptrs, thus removing binding ambiguity
+        tempvar range_check_ptr = range_check_ptr     
+        tempvar storage_ptr = storage_ptr  
+        tempvar pedersen_ptr = pedersen_ptr
+    end
+
+    if market.ruling == 1: 
         if bet.direction == 1:
             # user won - return their bet amount & winning share
             _dist_money(market.total_up, market.total_down, bet.amount, user, 1)
@@ -217,6 +224,11 @@ func _claim_rewards{
             tempvar storage_ptr = storage_ptr  
             tempvar pedersen_ptr = pedersen_ptr
         end
+    else:
+        # rebinding ptrs, thus removing binding ambiguity
+        tempvar range_check_ptr = range_check_ptr     
+        tempvar storage_ptr = storage_ptr  
+        tempvar pedersen_ptr = pedersen_ptr
     end
 
     # nullify user's bet

@@ -471,9 +471,10 @@ func change_market_to_resolving{
     alloc_locals
     # verify owner's signature 
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(market_id, 0)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -492,9 +493,10 @@ func change_markets_to_resolving{
     ecdsa_ptr : SignatureBuiltin*}(market_ids_len: felt, market_ids: felt* , sig_r: felt, sig_s: felt) -> ():
     # verify owner's signature 
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}([market_ids], market_ids_len)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -512,9 +514,10 @@ func change_market_to_expired{
 
     # verify owner's signature 
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(market_id, 0)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -533,9 +536,10 @@ func change_markets_to_expired{
     ecdsa_ptr : SignatureBuiltin*}(market_ids_len: felt, market_ids: felt*, sig_r: felt, sig_s: felt) -> ():
     # verify owner's signature 
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}([market_ids], market_ids_len)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -551,9 +555,10 @@ func resolve_market{
     ecdsa_ptr : SignatureBuiltin*}(market_id: felt, ruling: felt, sig_r:felt, sig_s: felt) -> ():
     alloc_locals
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(market_id, ruling)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -573,9 +578,10 @@ func resolve_markets{
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}([market_ids], market_ids_len)
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(arg_hash, [ruling_list])
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(arg_hash, ruling_list_len)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -625,9 +631,10 @@ func modify_l1_contract_address{
     range_check_ptr,
     ecdsa_ptr : SignatureBuiltin*}(new_address: felt, sig_r: felt, sig_s: felt) -> ():
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(new_address, 0)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
@@ -642,9 +649,10 @@ func modify_owner{
     range_check_ptr,
     ecdsa_ptr : SignatureBuiltin*}(new_owner: felt, sig_r: felt, sig_s: felt) -> ():
     let (arg_hash) = hash2{hash_ptr=pedersen_ptr}(new_owner, 0)
+    let (owner) = _owner.read()
     verify_ecdsa_signature(
         message=arg_hash,
-        public_key=_owner,
+        public_key=owner,
         signature_r=sig_r,
         signature_s=sig_s 
     )
